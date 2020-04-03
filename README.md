@@ -1,2 +1,2 @@
-# IN104_Anthony_Aoun_Adrien_Bennatan
+# IN104_Anthony-Aoun_Adrien-Bennatan
 The IN104 project at ENSTA Paris
