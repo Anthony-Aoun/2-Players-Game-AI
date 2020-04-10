@@ -3,10 +3,18 @@
 import aiarena
 from ..randomBrain import RandomBrain
 
+brain1 = RandomBrain()
+brain2 = RandomBrain()
+timeLimit = 40 # each player will have 10 seconds to play
+game = aiarena.Game(aiarena.checkers, brain1, timeLimit, brain2, timeLimit)
+game.start()
+
 # TODO: Instantier ICI des IA de type RandomBrain
 
-for module in [aiarena.abalone, aiarena.chess, aiarena.checkers, aiarena.connect4]:
+#for module in [aiarena.abalone, aiarena.chess, aiarena.checkers, aiarena.connect4]:
+    
     # TODO: ajouter le code pour lancer une partie et afficher son déroulement
     # afficher le PGN en fin de partie
-    input('press enter to continue')
+print(game.pgn)
+input('press enter to continue')
 
