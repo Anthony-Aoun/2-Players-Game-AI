@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
-setup(name='IN104_PROJECT_INSERT_YOUR_GROUP_NAMES_HERE',
+setup(name='IN104_PROJECT_AOUN_BENNATAN',
       description='IN104 Project package',
-      author='<INSERT_YOUR_GROUP_NAMES_HERE>',
+      author='<AOUN_BENNATAN>',
       packages=find_packages()
       )

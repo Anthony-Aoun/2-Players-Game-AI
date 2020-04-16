@@ -6,8 +6,8 @@
 import aiarena
 brain1 = aiarena.ManualBrain()
 brain2 = aiarena.ManualBrain()
-timeLimit = 40 # each player will have 10 seconds to play
-game = aiarena.Game(aiarena.checkers, brain1, timeLimit, brain2, timeLimit)
+timeLimit = 40 # each player will have 40 seconds to play
+game = aiarena.Game(aiarena.chess, brain1, timeLimit, brain2, timeLimit)
 game.start()
 print(game.pgn) # display the game summary
 
