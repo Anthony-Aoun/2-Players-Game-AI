@@ -1,7 +1,7 @@
 import random
 import sys
 import subprocess as sp
-from misc_copy import smart_display
+from misc import smart_display
 
 class RandomBrain:
     def __init__(self):
