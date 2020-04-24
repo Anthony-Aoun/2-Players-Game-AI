@@ -17,7 +17,20 @@ class MinimaxBrain:
         self.evaluate = evaluations_functions[gameclass]
 
     def play(self, gameState, timeLimit):
+        possibleMoves = gameState.findPossibleMoves()
+        indice_opti = 0
+        score_opti = minimax(possibleMoves[0],maximize,self.get_children,self.evaluate,self.depth)
+        for move,i in enumerate(possibleMoves):
+            score = minimax(possibleMoves[i],maximize,self.get_children,self.evaluate,self.depth)
+            if score > score_opti :
+                indice_opti=i
+                score_opti=score
+        return possibleMoves[i]
+        
+        
+        
         raise NotImplementedError()
 
     def __str__(self):
         return "MiniMax_Player"
+
