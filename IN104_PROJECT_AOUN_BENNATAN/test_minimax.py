@@ -2,7 +2,6 @@ import random
 import argparse
 import time
 
-
 class Node:
     def __init__(self, maximizing):
         self.maximizing = maximizing
@@ -163,7 +162,7 @@ if __name__ == '__main__':
     args = parser.parse_args()    
     
     # importation de minimax
-    cmd = f'from ..minimax.{args.version} import minimax'
+    cmd = f'from minimax.{args.version} import minimax'
     print(cmd)
     exec(cmd)
 
@@ -174,3 +173,4 @@ if __name__ == '__main__':
         test(*get_random_tree(maximize=k % 2 == 0, max_depth=random.randint(4, 6)))
     duration = time.time() - t0
     print("{} tests passés avec succès en {:.3f}ms".format(args.ntests + 1, duration*1000))
+
