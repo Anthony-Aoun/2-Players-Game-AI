@@ -1,7 +1,7 @@
 # executez ce script dans un terminal (depuis n'importe quel repertoire)
 # avec la commande python -m IN104_PROJECT_NOM1_NOM2.scripts.random_vs_random
 import aiarena
-from randomBrain import RandomBrain
+from ..randomBrain import RandomBrain
 
 brain1 = RandomBrain()
 brain2 = RandomBrain()

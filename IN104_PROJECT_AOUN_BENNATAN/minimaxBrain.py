@@ -27,9 +27,7 @@ class MinimaxBrain:
                 score_opti=score
         return possibleMoves[i]
         
-        
-        
-        raise NotImplementedError()
+
 
     def __str__(self):
         return "MiniMax_Player"
