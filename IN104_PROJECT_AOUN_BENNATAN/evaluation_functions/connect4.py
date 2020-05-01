@@ -19,12 +19,12 @@ def compter(joueur,gs):
                         if possible : compt1+=1
                         possible = True
                     if j<4:
-                        for u in range(1,4)
+                        for u in range(1,4):
                             if gs.getCell(i,j+u).color == connect4.cell.BLACK : possible = False
                         if possible: compt1+=1
                         possible=True
                     if j>2:
-                        for u in range(1,4)
+                        for u in range(1,4):
                             if gs.getCell(i,j-u).color == connect4.cell.BLACK : possible = False
                         if possible: compt1+=1
                     
@@ -47,12 +47,12 @@ def compter(joueur,gs):
                         if possible : compt1+=1
                         possible = True
                     if j<4:
-                        for u in range(1,4)
+                        for u in range(1,4):
                             if gs.getCell(i,j+u).color == connect4.cell.WHITE : possible = False
                         if possible: compt1+=1
                         possible=True
                     if j>2:
-                        for u in range(1,4)
+                        for u in range(1,4):
                             if gs.getCell(i,j-u).color == connect4.cell.WHITE : possible = False
                         if possible: compt1+=1
     return compt1
