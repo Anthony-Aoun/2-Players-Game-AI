@@ -22,7 +22,7 @@ class MinimaxBrain:
         gameState.display(showBoard=True)
         indice_opti = 0
         score_opti = minimax(possibleMoves[0],True,self.get_children,self.evaluate,self.depth)
-        for move,i in enumerate(possibleMoves):
+        for i,move in enumerate(possibleMoves):
             score = minimax(possibleMoves[i],True,self.get_children,self.evaluate,self.depth)
             if score > score_opti :
                 indice_opti=i
@@ -34,4 +34,6 @@ class MinimaxBrain:
 
     def __str__(self):
         return "MiniMax_Player"
+
+  
 
