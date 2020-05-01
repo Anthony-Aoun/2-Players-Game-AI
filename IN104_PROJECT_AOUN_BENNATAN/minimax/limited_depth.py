@@ -4,7 +4,7 @@
 import numpy as np
 
 def minimax(node, maximize, get_children, evaluate, max_depth):
-    if (max_depth == 0) or (get_children(node) == []):
+    if (max_depth == 0 or (get_children(node) == [])):
         return evaluate(node)
     
     if (maximize == True):

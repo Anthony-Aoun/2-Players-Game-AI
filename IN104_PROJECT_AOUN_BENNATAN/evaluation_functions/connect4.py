@@ -2,7 +2,7 @@ from aiarena.connect4 import cell
 
 def compter(joueur,gs):
     compt1 = 0
-    if joueur == true :
+    if joueur == True :
         for i in range(7) :
             for j in range(6) :
                 if gs.getCell(i,j).color == connect4.cell.WHITE :
@@ -62,7 +62,7 @@ def compter(joueur,gs):
 
 def evaluate(gs):
     #on compte le nombre de puissance 4 possibles et on soustrait entre les joueurs
-    compt1 = compter(true,gs)
-    compt2 = compter(false,gs)
+    compt1 = compter(True,gs)
+    compt2 = compter(False,gs)
     return compt1-compt2
     raise NotImplementedError()

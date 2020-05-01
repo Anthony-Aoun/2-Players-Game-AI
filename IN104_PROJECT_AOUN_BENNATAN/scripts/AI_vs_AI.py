@@ -11,14 +11,14 @@ parser.add_argument('game', type=str,
 args = parser.parse_args()
 game_name = args.game
 
-ai_time = 10
+ai_time = 20
 if game_name == 'checkers':
     brain = MinimaxBrain(aiarena.checkers)
-    brain.depth = 7
+    brain.depth = 5
     game = aiarena.Game(aiarena.checkers, brain, ai_time, brain, ai_time)
 elif game_name == 'connect4':
     brain = MinimaxBrain(aiarena.connect4)
-    brain.depth = 7
+    brain.depth = 5
     game = aiarena.Game(aiarena.connect4, brain, ai_time, brain, ai_time)
 else:
     print("ERROR : invalid game's name")

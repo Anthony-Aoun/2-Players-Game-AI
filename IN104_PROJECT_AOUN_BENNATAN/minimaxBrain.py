@@ -20,10 +20,15 @@ class MinimaxBrain:
         possibleMoves = gameState.findPossibleMoves()
         sp.check_call('clear')
         gameState.display(showBoard=True)
+
         indice_opti = 0
-        score_opti = minimax(possibleMoves[0],True,self.get_children,self.evaluate,self.depth)
+        gameState_copy = gameState.copy()
+        gameState_copy.doMove(possibleMoves[0])
+        score_opti = minimax(gameState_copy,True,self.get_children,self.evaluate,self.depth)
         for i,move in enumerate(possibleMoves):
-            score = minimax(possibleMoves[i],True,self.get_children,self.evaluate,self.depth)
+            gameState_copy = gameState.copy()
+            gameState_copy.doMove(possibleMoves[i])
+            score = minimax(gameState_copy,True,self.get_children,self.evaluate,self.depth)
             if score > score_opti :
                 indice_opti=i
                 score_opti=score
@@ -37,3 +42,7 @@ class MinimaxBrain:
 
   
 
+if __name__ == '__main__':
+    my_ai = MinimaxBrain(aiarena.checkers)
+    my_gamestate = aiarena.checkers.GameState()
+    my_ai.play(my_gamestate,5)

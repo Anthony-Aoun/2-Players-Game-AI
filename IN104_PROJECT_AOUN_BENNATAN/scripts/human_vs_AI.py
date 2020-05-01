@@ -13,14 +13,14 @@ game_name = args.game
 brain1 = aiarena.ManualBrain()
 human_time = 40
 
-ai_time = 10
+ai_time = 20
 if game_name == 'checkers':
     brain2 = MinimaxBrain(aiarena.checkers)
-    brain2.depth = 7
+    brain2.depth = 5
     game = aiarena.Game(aiarena.checkers, brain1, human_time, brain2, ai_time)
 elif game_name == 'connect4':
     brain2 = MinimaxBrain(aiarena.connect4)
-    brain2.depth = 7
+    brain2.depth = 5
     game = aiarena.Game(aiarena.connect4, brain1, human_time, brain2, ai_time)
 else:
     print("ERROR : invalid game's name")
