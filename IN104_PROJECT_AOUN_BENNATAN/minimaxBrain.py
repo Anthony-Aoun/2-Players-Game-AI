@@ -1,7 +1,7 @@
 import aiarena
-# changer l'import ci-dessous pour changer la version de minimax utilisée
 from .minimax.limited_depth import minimax
 from .evaluation_functions import connect4, checkers
+import subprocess as sp
 
 # definition d'un dictionaire qui associe à chaque jeu une fonction d'évaluation
 evaluations_functions = {
@@ -18,14 +18,17 @@ class MinimaxBrain:
 
     def play(self, gameState, timeLimit):
         possibleMoves = gameState.findPossibleMoves()
+        sp.check_call('clear')
+        gameState.display(showBoard=True)
         indice_opti = 0
-        score_opti = minimax(possibleMoves[0],false,self.get_children,self.evaluate,self.depth)
+        score_opti = minimax(possibleMoves[0],True,self.get_children,self.evaluate,self.depth)
         for move,i in enumerate(possibleMoves):
-            score = minimax(possibleMoves[i],false,self.get_children,self.evaluate,self.depth)
+            score = minimax(possibleMoves[i],True,self.get_children,self.evaluate,self.depth)
             if score > score_opti :
                 indice_opti=i
                 score_opti=score
         return possibleMoves[i]
+        
         
 
 
