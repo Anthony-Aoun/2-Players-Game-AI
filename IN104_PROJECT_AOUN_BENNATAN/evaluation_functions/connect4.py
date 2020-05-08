@@ -139,6 +139,36 @@ def evaluate(gs):
     nb2 = count('b',gs)
     return nb1-nb2
 
+'''
+Cette evaluation a un grand defaut. L'IA cherche a alligner
+ses pieces sans m'empecher d'alligner les miennes.
+
+Exemple:
+o:moi
+x:IA
+
+
+
+      x
+ooo   x  AI'turn
+
+L'IA va faire le choix suivant et me laisse gagner: 
+
+
+      x
+      x
+ooo   x  Human'turn
+
+Ce n'est pas sa faute, selon son raisonnement, de cette maniere
+il minimise la difference de possibilites de gain (l'annule dans
+ce cas)
+
+Il faut ajouter une codition du style: si ton adversaire a 3 pieces 
+allignees et que tu peux les bloquer vas-y
+
+'''
+
+
 
 
 
