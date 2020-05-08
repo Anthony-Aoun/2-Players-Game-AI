@@ -41,8 +41,3 @@ class MinimaxBrain:
         return "MiniMax_Player"
 
   
-
-if __name__ == '__main__':
-    my_ai = MinimaxBrain(aiarena.checkers)
-    my_gamestate = aiarena.checkers.GameState()
-    my_ai.play(my_gamestate,5)

@@ -13,7 +13,7 @@ game_name = args.game
 brain1 = aiarena.ManualBrain()
 human_time = 40
 
-ai_time = 20
+ai_time = 200
 if game_name == 'checkers':
     brain2 = MinimaxBrain(aiarena.checkers)
     brain2.depth = 5
