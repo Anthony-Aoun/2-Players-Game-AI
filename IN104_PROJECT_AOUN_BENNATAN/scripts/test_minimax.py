@@ -157,7 +157,7 @@ def test(root, solution):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('version', nargs='?', default='limited_depth')
+    parser.add_argument('version', nargs='?', default='limited_depth_alphabeta')
     parser.add_argument('-n', '--ntests', type=int, default=100,
                         help='nombre de tests effectués sur des arbres aléatoirement générés')
     args = parser.parse_args()    

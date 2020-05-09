@@ -1,5 +1,5 @@
 import aiarena
-from .minimax.limited_depth import minimax
+from .minimax.limited_depth_alphabeta import minimax
 from .evaluation_functions import connect4, checkers
 import subprocess as sp
 
