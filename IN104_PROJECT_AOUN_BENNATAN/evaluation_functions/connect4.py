@@ -1,5 +1,13 @@
 import aiarena
 
+def canWin(gs):
+    return False
+    #TO COMPLETE...
+
+def canBlock(gs):
+    return False
+    #TO COMPLETE...
+
 def count(player,gs):
     nb=0
     if player == 'w':
@@ -81,7 +89,7 @@ def count(player,gs):
                     while ((i-down)>=0 and gs.getCell(i-down,j).color == aiarena.connect4.cell.BLACK):
                         inRow+=1
                         down+=1
-
+                    
                     if (inRow >= 4):
                         nb+=1
 
@@ -134,7 +142,14 @@ def count(player,gs):
 
 
 def evaluate(gs):
-    #on compte le nombre de puissance 4 possibles et on soustrait entre les joueurs
+    #on teste les cas critiques
+    if canWin(gs):
+        return 1000
+        
+    if canBlock(gs):
+        return 1000
+    
+    #sinon on compte le nombre de puissance 4 possibles et on soustrait entre les joueurs
     nb1 = count('w',gs)
     nb2 = count('b',gs)
     return nb1-nb2
