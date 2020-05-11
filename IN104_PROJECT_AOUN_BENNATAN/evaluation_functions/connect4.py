@@ -181,8 +181,7 @@ ce cas)
 Il faut ajouter une codition du style: si ton adversaire a 3 pieces 
 allignees et que tu peux les bloquer vas-y
 
-PS : J'ai essaye de retourner -1000 si l'adversaire a 4 ou plus allignees 
-mais ca n'a pas l'air de marcher
+PS : Essayons de donne +100 si l'IA a une combinaison et -100 sinon
 
 '''
 
