@@ -8,7 +8,7 @@ def evaluate(gameState):
         if (c.isWhite == True) and (c.type != aiarena.checkers.cell.NONE):
             white += 1
 
-        elif c.isWhite == False and (c.type != aiarena.checkers.cell.NONE):
+        elif (c.isWhite == False) and (c.type != aiarena.checkers.cell.NONE):
             black += 1
 
     return (white-black)
