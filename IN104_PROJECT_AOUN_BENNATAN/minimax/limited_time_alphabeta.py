@@ -5,7 +5,7 @@ import numpy as np
 import time
 
 def alphabeta(node, maximize, get_children, evaluate, maxTime,a,b):
-    if (maxTime < 1 or (get_children(node) == [])):
+    if (maxTime <= 0 or (get_children(node) == [])):
         return evaluate(node)
     
     if (maximize == True):
@@ -16,7 +16,7 @@ def alphabeta(node, maximize, get_children, evaluate, maxTime,a,b):
             a = max(a,alphabeta(child, False, get_children, evaluate, (maxTime-elapsed)/(childNumber-i),a,b))
             if a >= b:
                 break
-            elapsed += tic - time.time()
+            elapsed += time.time() - tic
         return a
 
     elif (maximize == False):
@@ -27,7 +27,7 @@ def alphabeta(node, maximize, get_children, evaluate, maxTime,a,b):
             b = min(b,alphabeta(child, True, get_children, evaluate, (maxTime-elapsed)/(childNumber-i),a,b))
             if a >= b:
                 break
-            elapsed+= tic - time.time()
+            elapsed+= time.time() - tic
         return b
 
 def minimax(node, maximize, get_children, evaluate, maxTime):

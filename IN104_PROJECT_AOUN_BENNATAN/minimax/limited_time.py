@@ -5,7 +5,7 @@ import numpy as np
 import time
 
 def minimax(node, maximize, get_children, evaluate, maxTime):
-    if (maxTime < 1 or (get_children(node) == [])):
+    if (maxTime <= 0 or (get_children(node) == [])):
         return evaluate(node)
     
     if (maximize == True):
@@ -16,7 +16,7 @@ def minimax(node, maximize, get_children, evaluate, maxTime):
             tic = time.time()
             value = minimax(child, False, get_children, evaluate, (maxTime-elapsed)/(childNumber-i))
             best = max(best, value)
-            elapsed += tic - time.time()
+            elapsed += time.time() - tic
         return best
 
     elif (maximize == False):
@@ -27,7 +27,7 @@ def minimax(node, maximize, get_children, evaluate, maxTime):
             tic = time.time()
             value = minimax(child, True, get_children, evaluate, (maxTime-elapsed)/(childNumber-i))
             best = min(best, value)
-            elapsed+= tic - time.time()
+            elapsed+= time.time() - tic
         return best
 
 
