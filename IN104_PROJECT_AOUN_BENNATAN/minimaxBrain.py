@@ -2,6 +2,7 @@ import aiarena
 from .minimax.limited_depth_negascout_tt import minimax
 from .evaluation_functions import connect4, checkers
 import subprocess as sp
+import numpy as np
 
 # definition d'un dictionaire qui associe à chaque jeu une fonction d'évaluation
 evaluations_functions = {
@@ -22,9 +23,7 @@ class MinimaxBrain:
         gameState.display(showBoard=True)
 
         indice_opti = 0
-        gameState_copy = gameState.copy()
-        gameState_copy.doMove(possibleMoves[0])
-        score_opti = minimax(gameState_copy,True,self.get_children,self.evaluate,self.depth)
+        score_opti = -(np.Inf)
         for i,move in enumerate(possibleMoves):
             gameState_copy = gameState.copy()
             gameState_copy.doMove(possibleMoves[i])
@@ -32,7 +31,7 @@ class MinimaxBrain:
             if score > score_opti :
                 indice_opti=i
                 score_opti=score
-        return possibleMoves[i]
+        return possibleMoves[indice_opti]
         
         
 

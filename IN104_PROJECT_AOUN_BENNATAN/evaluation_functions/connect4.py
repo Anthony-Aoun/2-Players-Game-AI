@@ -142,48 +142,28 @@ def count(player,gs):
 
 
 def evaluate(gs):
-    #on teste les cas critiques
-    if canWin(gs):
-        return 1000
+    #If match not finished, 3 in a row AI - 3 in a row opponent
+    if gs.checkTermination() == 0:
+        nb1 = count('w',gs)
+        nb2 = count('b',gs)
+        return nb1-nb2
+
+    #If AI wins
+    elif gs.checkTermination() == 1:
+        return 100
         
-    if canBlock(gs):
-        return 1000
+    #If AI looses
+    elif gs.checkTermination() == 2:
+        return -100
+
+    #If draw
+    elif gs.checkTermination() == 3:
+        return 0
     
-    #sinon on compte le nombre de puissance 4 possibles et on soustrait entre les joueurs
-    nb1 = count('w',gs)
-    nb2 = count('b',gs)
-    return nb1-nb2
-
-'''
-Cette evaluation a un grand defaut. L'IA cherche a alligner
-ses pieces sans m'empecher d'alligner les miennes.
-
-Exemple:
-o:moi
-x:IA
+    
+    
 
 
-
-      x
-ooo   x  AI'turn
-
-L'IA va faire le choix suivant et me laisse gagner: 
-
-
-      x
-      x
-ooo   x  Human'turn
-
-Ce n'est pas sa faute, selon son raisonnement, de cette maniere
-il minimise la difference de possibilites de gain (l'annule dans
-ce cas)
-
-Il faut ajouter une codition du style: si ton adversaire a 3 pieces 
-allignees et que tu peux les bloquer vas-y
-
-PS : Essayons de donne +100 si l'IA a une combinaison et -100 sinon
-
-'''
 
 
 
