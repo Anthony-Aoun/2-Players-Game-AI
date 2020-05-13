@@ -20,8 +20,8 @@ def alphabeta_transp(node, maximize, get_children, evaluate, max_depth,a,b,table
                 value = alphabeta_transp(child, False, get_children, evaluate, max_depth-1,a,b,table)
                 a = max(a,value)
                 table.update({child.toString() : value})
-                if a >= b:
-                    break
+            if a >= b:
+                break
         return a
 
     elif (maximize == False):
@@ -35,8 +35,8 @@ def alphabeta_transp(node, maximize, get_children, evaluate, max_depth,a,b,table
                 value = alphabeta_transp(child, True, get_children, evaluate, max_depth-1,a,b,table)
                 b = min(b,value)
                 table.update({child.toString() : value})
-                if a >= b:
-                    break    
+            if a >= b:
+                break    
         return b
 
 def minimax(node, maximize, get_children, evaluate, max_depth):
