@@ -1,5 +1,5 @@
 import aiarena
-from .minimax.limited_depth_negascout import minimax
+from .minimax.limited_depth_negascout_tt import minimax
 from .evaluation_functions import connect4, checkers
 import subprocess as sp
 
