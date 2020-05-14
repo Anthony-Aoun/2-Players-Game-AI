@@ -4,8 +4,8 @@
 import numpy as np
 import time
 
-def alphabeta(node, maximize, get_children, evaluate, maxTime,a,b):
-    if (maxTime <= 0 or (get_children(node) == [])):
+def alphabeta(node, maximize, get_children, evaluate, maxTime,researchTime, a,b):
+    if (maxTime < researchTime or (get_children(node) == [])):
         return evaluate(node)
     
     if (maximize == True):
@@ -13,7 +13,7 @@ def alphabeta(node, maximize, get_children, evaluate, maxTime,a,b):
         childNumber = len(get_children(node))
         for i,child in enumerate(get_children(node)):
             tic = time.time()
-            a = max(a,alphabeta(child, False, get_children, evaluate, (maxTime-elapsed)/(childNumber-i),a,b))
+            a = max(a,alphabeta(child, False, get_children, evaluate, (maxTime-elapsed)/(childNumber-i),researchTime,a,b))
             if a >= b:
                 break
             elapsed += time.time() - tic
@@ -24,13 +24,13 @@ def alphabeta(node, maximize, get_children, evaluate, maxTime,a,b):
         childNumber = len(get_children(node))
         for i,child in enumerate(get_children(node)):
             tic = time.time()
-            b = min(b,alphabeta(child, True, get_children, evaluate, (maxTime-elapsed)/(childNumber-i),a,b))
+            b = min(b,alphabeta(child, True, get_children, evaluate, (maxTime-elapsed)/(childNumber-i),researchTime,a,b))
             if a >= b:
                 break
             elapsed+= time.time() - tic
         return b
 
-def minimax(node, maximize, get_children, evaluate, maxTime):
-    return alphabeta(node, maximize, get_children, evaluate, maxTime,-(np.Inf),np.Inf)
+def minimax(node, maximize, get_children, evaluate, maxTime, researchTime):
+    return alphabeta(node, maximize, get_children, evaluate, maxTime, researchTime, -(np.Inf),np.Inf)
 
 

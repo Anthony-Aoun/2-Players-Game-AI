@@ -4,8 +4,8 @@
 import numpy as np
 import time
 
-def alphabeta_transp(node, maximize, get_children, evaluate, maxTime,a,b,table):
-    if (maxTime <= 0 or (get_children(node) == [])):
+def alphabeta_transp(node, maximize, get_children, evaluate, maxTime,researchTime, a,b,table):
+    if (maxTime < researchTime or (get_children(node) == [])):
         return evaluate(node)
     
     if (maximize == True):
@@ -19,7 +19,7 @@ def alphabeta_transp(node, maximize, get_children, evaluate, maxTime,a,b,table):
                 a = max(a,value) 
             #If the child hasn't been visited, we visit it and add it to table
             else:
-                value = alphabeta_transp(child, False, get_children, evaluate, (maxTime-elapsed)/(childNumber-i),a,b,table)
+                value = alphabeta_transp(child, False, get_children, evaluate, (maxTime-elapsed)/(childNumber-i),researchTime,a,b,table)
                 a = max(a,value)
                 table.update({child.toString() : value})
             if a >= b:
@@ -38,7 +38,7 @@ def alphabeta_transp(node, maximize, get_children, evaluate, maxTime,a,b,table):
                 b = min(b,value) 
             #If the child hasn't been visited, we visit it and add it to table
             else:
-                value = alphabeta_transp(child, True, get_children, evaluate, (maxTime-elapsed)/(childNumber-i),a,b,table)
+                value = alphabeta_transp(child, True, get_children, evaluate, (maxTime-elapsed)/(childNumber-i),researchTime,a,b,table)
                 b = min(b,value)
                 table.update({child.toString() : value})
             if a >= b:
@@ -46,7 +46,7 @@ def alphabeta_transp(node, maximize, get_children, evaluate, maxTime,a,b,table):
             elapsed+= time.time() - tic
         return b
 
-def minimax(node, maximize, get_children, evaluate, maxTime):
-    return alphabeta_transp(node, maximize, get_children, evaluate, maxTime,-(np.Inf),np.Inf,{})
+def minimax(node, maximize, get_children, evaluate, maxTime,researchTime):
+    return alphabeta_transp(node, maximize, get_children, evaluate, maxTime, researchTime,-(np.Inf),np.Inf,{})
 
 
