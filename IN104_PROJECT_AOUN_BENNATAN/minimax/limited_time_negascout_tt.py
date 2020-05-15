@@ -5,31 +5,35 @@ import numpy as np
 import time
 
 def nega_transp(node, maximize, get_children, evaluate, maxTime, researchTime, a, b, table):
-    if (maxTime < researchTime or (get_children(node) == [])):
+    tic = time.time()
+    children = get_children(node)
+
+    if (maxTime < researchTime or (children == [])):
         if maximize:
             return evaluate(node)
         else:
             return -evaluate(node)
 
-    elapsed=0
-    childNumber = len(get_children(node))
-    for i,child in enumerate(get_children(node)):
-        tic = time.time()
-
+    childrenNumber = len(children)
+    for i,child in enumerate(children):
         #If the child has been visited we just take its value without exploring its children
         if child.toString() in table:
             score = table[child.toString()]
 
         #If the child hasn't been visited, we visit it and add it to table
         else:
+            
             if i!=0:
-                score = -nega_transp(child,not(maximize),get_children,evaluate,(maxTime-elapsed)/(childNumber-i),researchTime,-a-1,-a,table)
+                elapsed = time.time()-tic
+                score = -nega_transp(child,not(maximize),get_children,evaluate,(maxTime-elapsed)/(childrenNumber-i),researchTime,-a-1,-a,table)
 
                 if a<score and score<b:
-                    score = -nega_transp(child,not(maximize),get_children,evaluate,(maxTime-elapsed)/(childNumber-i),researchTime,-b,-score,table)
+                    elapsed = time.time()-tic
+                    score = -nega_transp(child,not(maximize),get_children,evaluate,(maxTime-elapsed)/(childrenNumber-i),researchTime,-b,-score,table)
 
             else:
-                score = -nega_transp(child,not(maximize),get_children,evaluate,(maxTime-elapsed)/(childNumber-i),researchTime,-b,-a,table)
+                elapsed = time.time()-tic
+                score = -nega_transp(child,not(maximize),get_children,evaluate,(maxTime-elapsed)/(childrenNumber-i),researchTime,-b,-a,table)
 
             table.update({child.toString() : score})
 
@@ -37,8 +41,6 @@ def nega_transp(node, maximize, get_children, evaluate, maxTime, researchTime, a
 
         if a >= b:
             break
-        
-        elapsed += time.time() - tic
 
     return a
 

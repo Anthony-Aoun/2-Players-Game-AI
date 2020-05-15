@@ -21,6 +21,7 @@ class MinimaxBrain:
         possibleMoves = gameState.findPossibleMoves()
         sp.check_call('clear')
         gameState.display(showBoard=True)
+        while(true): print("elo")
 
         indice_opti = 0
         score_opti = -(np.Inf)

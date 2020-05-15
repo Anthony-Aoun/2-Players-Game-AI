@@ -1,8 +1,8 @@
 import aiarena
-from ..minimaxBrain import MinimaxBrain
+from ..minimaxTimeBrain import MinimaxBrain
 
 import aiarena
-from ..minimaxBrain import MinimaxBrain
+from ..minimaxTimeBrain import MinimaxBrain
 import argparse
 
 parser = argparse.ArgumentParser(description='Add game type')
@@ -11,7 +11,7 @@ parser.add_argument('game', type=str,
 args = parser.parse_args()
 game_name = args.game
 
-ai_time = 100
+ai_time = 2
 if game_name == 'checkers':
     brain = MinimaxBrain(aiarena.checkers)
     brain.depth = 5
