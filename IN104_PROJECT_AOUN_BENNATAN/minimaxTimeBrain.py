@@ -2,6 +2,7 @@ import aiarena
 from .minimax.limited_time_alphabeta import minimax
 from .evaluation_functions import connect4, checkers
 import subprocess as sp
+import numpy as np
 import time
 
 # definition d'un dictionaire qui associe à chaque jeu une fonction d'évaluation
