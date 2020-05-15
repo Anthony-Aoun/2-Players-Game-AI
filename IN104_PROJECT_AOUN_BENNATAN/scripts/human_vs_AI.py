@@ -1,7 +1,7 @@
 # executez ce script dans un terminal (depuis n'importe quel repertoire)
 # avec la commande python -m IN104_PROJECT_NOM1_NOM2.scripts.human_vs_AI
 import aiarena
-from ..minimaxBrain import MinimaxBrain
+from ..minimaxTimeBrain import MinimaxBrain
 import argparse
 
 parser = argparse.ArgumentParser(description='Add game type')
@@ -13,7 +13,7 @@ game_name = args.game
 brain1 = aiarena.ManualBrain()
 human_time = 40
 
-ai_time = 200
+ai_time = 5
 if game_name == 'checkers':
     brain2 = MinimaxBrain(aiarena.checkers)
     brain2.depth = 5
