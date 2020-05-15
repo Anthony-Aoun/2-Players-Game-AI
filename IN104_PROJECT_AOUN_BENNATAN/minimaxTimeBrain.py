@@ -1,5 +1,5 @@
 import aiarena
-from .minimax.limited_time_negascout_tt import minimax
+from .minimax.limited_time_alphabeta import minimax
 from .evaluation_functions import connect4, checkers
 import subprocess as sp
 import time
@@ -26,23 +26,25 @@ class MinimaxBrain:
         self.evaluate = evaluations_functions[gameclass]
 
     def play(self, gameState, timeLimit):
+        tic = time.time()
         possibleMoves = gameState.findPossibleMoves()
         sp.check_call('clear')
         gameState.display(showBoard=True)
-        indice_opti = 0
         gameState_copy = gameState.copy()
         gameState_copy.doMove(possibleMoves[0])
         movesNumber = len(possibleMoves)
-        #+1 ne marchait pas...mais +2 marche
-        score_opti = minimax(gameState_copy,True,self.get_children,self.evaluate,timeLimit/(movesNumber+2),self.researchTime)
-        for i,move in enumerate(possibleMoves):
+        indice_opti = 0
+        elapsed = time.time() - tic
+        score_opti = minimax(gameState_copy,True,self.get_children,self.evaluate,(timeLimit-elapsed)/movesNumber,self.researchTime)
+        for i,move in enumerate(possibleMoves[1:]):
             gameState_copy = gameState.copy()
-            gameState_copy.doMove(possibleMoves[i])
-            score = minimax(gameState_copy,True,self.get_children,self.evaluate,timeLimit/(movesNumber+2),self.researchTime)
+            gameState_copy.doMove(move)
+            elapsed= time.time() - tic
+            score = minimax(gameState_copy,True,self.get_children,self.evaluate,(timeLimit-elapsed)/(movesNumber-(i+1)),self.researchTime)
             if score > score_opti :
-                indice_opti=i
+                indice_opti=i+1
                 score_opti=score
-        return possibleMoves[i]
+        return possibleMoves[indice_opti]
         
         
 

@@ -13,7 +13,6 @@ def minimax(node, maximize, get_children, evaluate, maxTime, researchTime):
     
     if (maximize == True):
         best = -(np.Inf)
-        elapsed = 0
         childrenNumber = len(children)
         for i,child in enumerate(children):
             elapsed = time.time() - tic
@@ -23,7 +22,6 @@ def minimax(node, maximize, get_children, evaluate, maxTime, researchTime):
 
     elif (maximize == False):
         best = np.Inf
-        elapsed = 0
         childrenNumber = len(children)
         for i,child in enumerate(children):
             elapsed = time.time() - tic

@@ -11,7 +11,7 @@ parser.add_argument('game', type=str,
 args = parser.parse_args()
 game_name = args.game
 
-ai_time = 2
+ai_time = 1
 if game_name == 'checkers':
     brain = MinimaxBrain(aiarena.checkers)
     brain.depth = 5
