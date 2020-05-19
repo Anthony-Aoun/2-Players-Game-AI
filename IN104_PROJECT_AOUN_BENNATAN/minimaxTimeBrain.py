@@ -1,5 +1,5 @@
 import aiarena
-from .minimax.limited_time_alphabeta import minimax
+from .minimax.limited_time_negascout_tt import minimax
 from .evaluation_functions import connect4, checkers
 import subprocess as sp
 import numpy as np
@@ -19,6 +19,12 @@ def compute_research_time(gs,gameclass):
         gameclass.GameState.findNextStates(gs)
     return (time.time() - tic)/10
 
+def compute_coeff(timeLimit) :
+    if timeLimit >= 1 : return 0.266*timeLimit +1.666
+    elif timeLimit<1 and timeLimit>=0.5 : return 0.8*timeLimit+0.6
+    else : return 1
+
+
 class MinimaxBrain:
 
     def __init__(self, gameclass, gameclass_arguments={}):
@@ -28,6 +34,7 @@ class MinimaxBrain:
 
     def play(self, gameState, timeLimit):
         tic = time.time()
+        coeff = compute_coeff(timeLimit)
         possibleMoves = gameState.findPossibleMoves()
         sp.check_call('clear')
         gameState.display(showBoard=True)
@@ -36,15 +43,16 @@ class MinimaxBrain:
         movesNumber = len(possibleMoves)
         indice_opti = 0
         elapsed = time.time() - tic
-        score_opti = minimax(gameState_copy,True,self.get_children,self.evaluate,(timeLimit-elapsed)/movesNumber,self.researchTime)
+        score_opti = minimax(gameState_copy,True,self.get_children,self.evaluate,(timeLimit-elapsed)/movesNumber+1,self.researchTime,coeff)
         for i,move in enumerate(possibleMoves[1:]):
             gameState_copy = gameState.copy()
             gameState_copy.doMove(move)
-            elapsed= time.time() - tic
-            score = minimax(gameState_copy,True,self.get_children,self.evaluate,(timeLimit-elapsed)/(movesNumber-(i+1)),self.researchTime)
+            elapsed = time.time() - tic
+            score = minimax(gameState_copy,True,self.get_children,self.evaluate,(timeLimit-elapsed)/(movesNumber-(i+1)),self.researchTime,coeff)
             if score > score_opti :
                 indice_opti=i+1
                 score_opti=score
+        elapsed=time.time() - tic
         return possibleMoves[indice_opti]
         
         
