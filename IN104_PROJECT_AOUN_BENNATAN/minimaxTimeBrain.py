@@ -13,16 +13,6 @@ evaluations_functions = {
 
 # le compute fait la moyenne du temps pour findNextStates sur un même gamestate (méthode bête) 
 # (une moyenne pour 10 lancers suffit, ça donne les mêmes résultats que pour beaucoup plus)
-def compute_research_time(gs,gameclass):
-    tic = time.time()
-    for i in range(10):
-        gameclass.GameState.findNextStates(gs)
-    return (time.time() - tic)/10
-
-def compute_coeff(timeLimit) :
-    if timeLimit >= 1 : return 0.266*timeLimit +1.666
-    elif timeLimit<1 and timeLimit>=0.5 : return 0.8*timeLimit+0.6
-    else : return 1
 
 
 class MinimaxBrain:
@@ -34,7 +24,6 @@ class MinimaxBrain:
 
     def play(self, gameState, timeLimit):
         tic = time.time()
-        coeff = compute_coeff(timeLimit)
         possibleMoves = gameState.findPossibleMoves()
         sp.check_call('clear')
         gameState.display(showBoard=True)
@@ -43,12 +32,12 @@ class MinimaxBrain:
         movesNumber = len(possibleMoves)
         indice_opti = 0
         elapsed = time.time() - tic
-        score_opti = minimax(gameState_copy,True,self.get_children,self.evaluate,(timeLimit-elapsed)/movesNumber+1,self.researchTime,coeff)
+        score_opti = minimax(gameState_copy,True,self.get_children,self.evaluate,(timeLimit-elapsed)/movesNumber+1,self.researchTime)
         for i,move in enumerate(possibleMoves[1:]):
             gameState_copy = gameState.copy()
             gameState_copy.doMove(move)
             elapsed = time.time() - tic
-            score = minimax(gameState_copy,True,self.get_children,self.evaluate,(timeLimit-elapsed)/(movesNumber-(i+1)),self.researchTime,coeff)
+            score = minimax(gameState_copy,True,self.get_children,self.evaluate,(timeLimit-elapsed)/(movesNumber-(i+1)),self.researchTime)
             if score > score_opti :
                 indice_opti=i+1
                 score_opti=score

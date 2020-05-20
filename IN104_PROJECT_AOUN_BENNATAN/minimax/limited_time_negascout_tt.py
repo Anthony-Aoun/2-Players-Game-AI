@@ -4,7 +4,7 @@
 import numpy as np
 import time
 
-def nega_transp(node, maximize, get_children, evaluate, maxTime, researchTime, a, b, table,coeff):
+def nega_transp(node, maximize, get_children, evaluate, maxTime, researchTime, a, b, table):
     tic = time.time()
     children = get_children(node)
 
@@ -25,15 +25,15 @@ def nega_transp(node, maximize, get_children, evaluate, maxTime, researchTime, a
             
             if i!=0:
                 elapsed = time.time()-tic
-                score = -nega_transp(child,not(maximize),get_children,evaluate,coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,-a-1,-a,table,coeff)
+                score = -nega_transp(child,not(maximize),get_children,evaluate,coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,-a-1,-a,table)
 
                 if a<score and score<b:
                     elapsed = time.time()-tic
-                    score = -nega_transp(child,not(maximize),get_children,evaluate,coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,-b,-score,table,coeff)
+                    score = -nega_transp(child,not(maximize),get_children,evaluate,coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,-b,-score,table)
 
             else:
                 elapsed = time.time()-tic
-                score = -nega_transp(child,not(maximize),get_children,evaluate,coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,-b,-a,table,coeff)
+                score = -nega_transp(child,not(maximize),get_children,evaluate,coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,-b,-a,table)
 
             table.update({child.toString() : score})
 
@@ -44,8 +44,8 @@ def nega_transp(node, maximize, get_children, evaluate, maxTime, researchTime, a
 
     return a
 
-def minimax(node, maximize, get_children, evaluate, maxTime, researchTime,coeff):
-    return nega_transp(node, maximize, get_children, evaluate, maxTime, researchTime, -(np.Inf), np.Inf,{},coeff)
+def minimax(node, maximize, get_children, evaluate, maxTime, researchTime):
+    return nega_transp(node, maximize, get_children, evaluate, maxTime, researchTime, -(np.Inf), np.Inf,{})
 
     
 
