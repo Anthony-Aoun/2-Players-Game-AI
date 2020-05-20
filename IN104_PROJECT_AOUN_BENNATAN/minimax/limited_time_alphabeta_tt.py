@@ -4,7 +4,7 @@
 import numpy as np
 import time
 
-def alphabeta_transp(node, maximize, get_children, evaluate, maxTime,researchTime, a,b,table):
+def alphabeta_transp(node, maximize, get_children, evaluate, maxTime,researchTime, a,b,table,coeff):
     tic = time.time()
     children = get_children(node)
 
@@ -21,7 +21,7 @@ def alphabeta_transp(node, maximize, get_children, evaluate, maxTime,researchTim
                 a = max(a,value) 
             #If the child hasn't been visited, we visit it and add it to table
             else:
-                value = alphabeta_transp(child, False, get_children, evaluate, (maxTime-elapsed)/(childrenNumber-i),researchTime,a,b,table)
+                value = alphabeta_transp(child, False, get_children, evaluate, coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,a,b,table,coeff)
                 a = max(a,value)
                 table.update({child.toString() : value})
             if a >= b:
@@ -39,14 +39,14 @@ def alphabeta_transp(node, maximize, get_children, evaluate, maxTime,researchTim
                 b = min(b,value) 
             #If the child hasn't been visited, we visit it and add it to table
             else:
-                value = alphabeta_transp(child, True, get_children, evaluate, (maxTime-elapsed)/(childrenNumber-i),researchTime,a,b,table)
+                value = alphabeta_transp(child, True, get_children, evaluate, coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,a,b,table,coeff)
                 b = min(b,value)
                 table.update({child.toString() : value})
             if a >= b:
                 break
         return b
 
-def minimax(node, maximize, get_children, evaluate, maxTime,researchTime):
-    return alphabeta_transp(node, maximize, get_children, evaluate, maxTime, researchTime,-(np.Inf),np.Inf,{})
+def minimax(node, maximize, get_children, evaluate, maxTime,researchTime,coeff):
+    return alphabeta_transp(node, maximize, get_children, evaluate, maxTime, researchTime,-(np.Inf),np.Inf,{},coeff)
 
 
