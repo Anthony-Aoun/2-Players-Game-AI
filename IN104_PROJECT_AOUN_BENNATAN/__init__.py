@@ -11,3 +11,5 @@ est accessible depuis l'exterieur du package grâce à la commande :
 
 from IN104_Project_Nom1_Nom2 import default_AI
 '''
+
+from .minimaxTimeBrain import MinimaxBrain as default_AI

@@ -1,5 +1,5 @@
 import aiarena
-from .minimax.limited_time_alphabeta_tt import minimax
+from .minimax.limited_time_negascout_tt import minimax
 from .evaluation_functions import connect4, checkers
 import subprocess as sp
 import numpy as np
@@ -19,10 +19,15 @@ def compute_research_time(gs,gameclass):
         gameclass.GameState.findNextStates(gs)
     return (time.time() - tic)/10
 
-def compute_coeff(timeLimit,epsilon) :
-    if timeLimit >= 1 : return 0.266*timeLimit +1.666 - epsilon
-    elif timeLimit<1 and timeLimit>=0.5 : return 0.8*timeLimit+0.6 - epsilon
+def compute_coeff_connect4(timeLimit) :
+    if timeLimit >= 1 : return 0.266*timeLimit +1.666 
+    elif timeLimit<1 and timeLimit>=0.5 : return 0.8*timeLimit+0.6 
     else : return 1
+
+def compute_coeff_checkers(timeLimit) :
+    if timeLimit>=1 : return 1.1
+    elif timeLimit<1 and timeLimit>=0.7 : return 1
+    else : return 0.9
 
 
 class MinimaxBrain:
@@ -31,11 +36,14 @@ class MinimaxBrain:
         self.researchTime = compute_research_time(gameclass.GameState(),gameclass)
         self.get_children = gameclass.GameState.findNextStates
         self.evaluate = evaluations_functions[gameclass]
-        self.epsilon = 0.1
+        self.game_name = gameclass
 
     def play(self, gameState, timeLimit):
         tic = time.time()
-        coeff = compute_coeff(timeLimit,self.epsilon)
+        if (self.game_name == aiarena.checkers) :
+            coeff = compute_coeff_checkers(timeLimit)
+        else :
+            coeff = compute_coeff_connect4(timeLimit)
         possibleMoves = gameState.findPossibleMoves()
         sp.check_call('clear')
         gameState.display(showBoard=True)
