@@ -1,6 +1,6 @@
 
 import aiarena
-from ..minimaxBrain import MinimaxBrain
+from ..minimaxTimeBrain import MinimaxBrain
 import argparse
 
 parser = argparse.ArgumentParser(description='Add game type')

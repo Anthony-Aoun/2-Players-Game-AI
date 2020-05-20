@@ -13,6 +13,11 @@ evaluations_functions = {
 
 # le compute fait la moyenne du temps pour findNextStates sur un même gamestate (méthode bête) 
 # (une moyenne pour 10 lancers suffit, ça donne les mêmes résultats que pour beaucoup plus)
+def compute_research_time(gs,gameclass):
+    tic = time.time()
+    for i in range(10):
+        gameclass.GameState.findNextStates(gs)
+    return (time.time() - tic)/10
 
 
 class MinimaxBrain:
