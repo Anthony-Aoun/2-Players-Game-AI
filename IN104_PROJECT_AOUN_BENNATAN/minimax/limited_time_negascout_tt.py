@@ -25,15 +25,15 @@ def nega_transp(node, maximize, get_children, evaluate, maxTime, researchTime, a
             
             if i!=0:
                 elapsed = time.time()-tic
-                score = -nega_transp(child,not(maximize),get_children,evaluate,coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,-a-1,-a,table)
+                score = -nega_transp(child,not(maximize),get_children,evaluate,(maxTime-elapsed)/(childrenNumber-i),researchTime,-a-1,-a,table)
 
                 if a<score and score<b:
                     elapsed = time.time()-tic
-                    score = -nega_transp(child,not(maximize),get_children,evaluate,coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,-b,-score,table)
+                    score = -nega_transp(child,not(maximize),get_children,evaluate,(maxTime-elapsed)/(childrenNumber-i),researchTime,-b,-score,table)
 
             else:
                 elapsed = time.time()-tic
-                score = -nega_transp(child,not(maximize),get_children,evaluate,coeff*(maxTime-elapsed)/(childrenNumber-i),researchTime,-b,-a,table)
+                score = -nega_transp(child,not(maximize),get_children,evaluate,(maxTime-elapsed)/(childrenNumber-i),researchTime,-b,-a,table)
 
             table.update({child.toString() : score})
 
